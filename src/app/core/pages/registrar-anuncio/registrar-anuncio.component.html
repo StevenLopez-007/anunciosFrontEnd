@@ -1,0 +1,106 @@
+<app-header></app-header>
+<div class="container pt-5">
+  <div class="row content-center">
+    <div class="col-lg-10 col-md-10 col-sl-11">
+      <div class="form-div content-center flex-column my-3">
+        <div class="images-add">
+          <swiper [slidesPerView]="1" [spaceBetween]="20">
+            <ng-template swiperSlide *ngFor="let img of previewImgs;let i = index">
+              <div class="select-img">
+                <img [src]="img" alt="Imagen">
+              </div>
+              <div class="text-center my-3">
+                <button (click)="quitImg(i)" mat-button color="warn">Descartar foto</button>
+              </div>
+            </ng-template>
+
+            <ng-template swiperSlide  *ngIf="previewImgs.length<5">
+              <div class="select-img my-3">
+                <input accept=".png,.jpg,.jpeg" type="file" (change)="selectImg($event.target['files'][0])">
+                <img src="/assets/noImg.jpg" alt="No hay una imagen">
+              </div>
+            </ng-template>
+          </swiper>
+        </div>
+        <form class="example-form" [formGroup]="registerAnuncioForm" (ngSubmit)="registerAnuncio()">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre">
+          </mat-form-field>
+
+          <table class="example-full-width" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field appearance="fill">
+                  <mat-label>Moneda</mat-label>
+                  <mat-select formControlName="moneda" (valueChange)="changeMoneda($event)">
+                    <mat-option *ngFor="let moneda of monedas" [value]="moneda">{{moneda}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field appearance="fill" floatLabel="always">
+                  <mat-label>Precio</mat-label>
+                  <input formControlName="precio" matInput type="number" class="example-right-align" placeholder="0">
+                  <span matPrefix>$&nbsp;</span>
+                  <!-- <span matSuffix>.00</span> -->
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+
+          <p>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Descripción</mat-label>
+              <textarea formControlName="descripcion" matInput></textarea>
+            </mat-form-field>
+
+          </p>
+
+          <table class="example-full-width" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field appearance="fill">
+                  <mat-label>Amenidades</mat-label>
+                  <mat-select [ngModelOptions]="{standalone: true}" multiple [(ngModel)]="amenidadesSelected" (ngModelChange)="amenidadesSelected">
+                    <mat-option *ngFor="let amenidad of amenidadesCheck" [value]="amenidad.value">{{amenidad.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Cantidad de baños</mat-label>
+                  <input type="number" matInput formControlName="num_banios">
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+
+          <table class="example-full-width" cellSpacing="0">
+            <tr>
+              <td><mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Cantidad de habitaciones</mat-label>
+                <input type="number" matInput formArrayName="num_habitaciones">
+              </mat-form-field></td>
+              <td><mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Cantidad de estacionamientos</mat-label>
+                <input type="number" matInput formArrayName="num_estacionamientos">
+              </mat-form-field></td>
+            </tr>
+          </table>
+
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Ubicación</mat-label>
+            <input matInput formControlName="ubicacion">
+          </mat-form-field>
+
+          <div>
+            <button class="button-quit-img"  type="submit" mat-flat-button color="primary">Registrar</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

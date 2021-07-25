@@ -1,0 +1,35 @@
+<app-auth-template>
+  <div class="form-div bg-white">
+    <form class="p-5" [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="text-center">
+        <img class="img-medium" src="/assets/logo.svg" alt="">
+      </div>
+      <div>
+        <h1 class="text-center text-secondary">Anuncios 24/7</h1>
+      </div>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Ingrese su email</mat-label>
+        <input matInput placeholder="example@example.com" formControlName="email" required>
+        <mat-error *ngIf="loginForm.get('email').invalid">{{getErrorEmailMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Ingrese su contraseña</mat-label>
+        <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+        <mat-error *ngIf="loginForm.get('password').invalid">{{getErrorPasswordMessage()}}</mat-error>
+        <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div class="button my-2">
+        <button [disabled]="disableButton" type="submit" mat-flat-button color="primary">Ingresar</button>
+      </div>
+
+      <div>
+        <h3 class="text-center">¿No tienes una cuenta?, <span class="text-primary cursor-pointer" routerLink="/register" [skipLocationChange]="true">registrate</span></h3>
+      </div>
+    </form>
+  </div>
+</app-auth-template>

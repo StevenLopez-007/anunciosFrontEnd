@@ -1,0 +1,41 @@
+<app-auth-template>
+  <div class="form-div bg-white">
+    <form class="p-5" [formGroup]="registerForm" (ngSubmit)="register()">
+      <div class="text-center">
+        <img class="img-medium" src="/assets/logo.svg" alt="">
+      </div>
+      <div>
+        <h1 class="text-center text-secondary">Anuncios 24/7</h1>
+      </div>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Ingrese su nombre</mat-label>
+        <input matInput formControlName="userName" required>
+        <mat-error *ngIf="registerForm.get('userName').invalid">{{getErrorUserNameMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Ingrese su email</mat-label>
+        <input matInput placeholder="example@example.com" formControlName="email" required>
+        <mat-error *ngIf="registerForm.get('email').invalid">{{getErrorEmailMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Ingrese su contraseña</mat-label>
+        <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+        <mat-error *ngIf="registerForm.get('password').invalid">{{getErrorPasswordMessage()}}</mat-error>
+        <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div class="button my-2">
+        <button [disabled]="disableButton" mat-flat-button color="primary">Registrarse</button>
+      </div>
+
+      <div>
+        <h3 class="text-center">¿Ya tienes una cuenta?, <span class="text-primary cursor-pointer" routerLink="/login" [skipLocationChange]="true">inicia sesión</span></h3>
+      </div>
+    </form>
+  </div>
+</app-auth-template>

@@ -1,1 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~swiper/swiper-bundle';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+*{
+  box-sizing: border-box;
+  --bg-color1:#F9FAFE;
+
+  --color-primary:#673ab7;
+  --color-secondary:#2f3152;
+}
+
+.content-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-color1{
+  background-color: var(--bg-color1);
+}
+
+.bg-white{
+  background-color: white;
+}
+
+.text-primary{
+  color:var(--color-primary)
+}
+.text-secondary{
+  color:var(--color-secondary)
+}
+
+.text-center{
+  text-align: center;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.img-medium{
+  width: 10rem;
+  height: 10rem;
+}
+
+.example-spacer{
+  flex: 1 1 auto;
+}

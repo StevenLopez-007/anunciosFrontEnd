@@ -1,0 +1,27 @@
+<app-header></app-header>
+<div class="container">
+  <h1 class="text-center my-2">Mis anuncios</h1>
+  <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-4 row-cols-md-2 row-cols-sm-2">
+    <div class="col p-3" *ngFor="let anuncio of anuncios">
+      <mat-card class="card-pokemon bg-color2">
+        <mat-card-header>
+          <mat-card-title>{{anuncio.nombre | titlecase}}</mat-card-title>
+          <mat-card-subtitle>Precio: {{anuncio.precio}} {{anuncio.moneda}}</mat-card-subtitle>
+        </mat-card-header>
+
+        <img mat-card-image [src]="anuncio.photos[0] | getimg" [alt]="anuncio.nombre">
+
+        <mat-card-content>
+          <p>
+            {{anuncio.descripcion}}
+          </p>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-button color="primary">Editar</button>
+          <button mat-button color="warn">Eliminar</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

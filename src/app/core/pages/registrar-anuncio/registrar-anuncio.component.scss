@@ -1,0 +1,45 @@
+.select-img {
+  position: relative;
+  text-align: center;
+  input {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+}
+.images-add {
+  img {
+    height: 15rem;
+    width: auto;
+  }
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+.example-right-align {
+  text-align: right;
+}
+td {
+  padding-right: 8px;
+}
+.button-quit-img{
+  width: 100%;
+}
+@media screen and (max-width:600px){
+  tr{
+    display: flex;
+    flex-direction: column;
+  }
+
+}
