@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import SwiperCore from 'swiper/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AnuncioService } from '../../../services/anuncio.service';
@@ -33,7 +32,7 @@ export class RegistrarAnuncioComponent implements OnInit {
     }
   ];
 
-  amenidadesSelected = ['ac', 'sp'];
+  amenidadesSelected = [];
 
   files:File[]=[];
   previewImgs:any[]=[];
@@ -52,13 +51,13 @@ export class RegistrarAnuncioComponent implements OnInit {
   configForm() {
 
     this.registerAnuncioForm = this.formBuilder.group({
-      nombre: ['propiedad en col santa fe', [Validators.required, Validators.minLength(10)]],
-      moneda: ['USD', [Validators.required]],
-      precio: [5000, [Validators.min(1)]],
-      descripcion: ['Vendo propiedad cerca de la santa fe', [Validators.required,Validators.minLength(10), Validators.maxLength(100)]],
-      ubicacion:['El paraiso',[Validators.required]],
-      num_banios: [2, [Validators.required, Validators.min(0)]],
-      num_habitaciones: [4, [Validators.required, Validators.min(0)]],
+      nombre: ['', [Validators.required, Validators.minLength(10)]],
+      moneda: ['', [Validators.required]],
+      precio: [1, [Validators.min(1)]],
+      descripcion: ['', [Validators.required,Validators.minLength(10), Validators.maxLength(100)]],
+      ubicacion:['',[Validators.required]],
+      num_banios: [1, [Validators.required, Validators.min(0)]],
+      num_habitaciones: [1, [Validators.required, Validators.min(0)]],
       num_estacionamientos: [0, [Validators.required, Validators.min(0)]],
     });
   }
@@ -88,6 +87,7 @@ export class RegistrarAnuncioComponent implements OnInit {
         await this.ngxSpinnerService.hide();
       },async (error)=>{
         console.log(error);
+        this.matSnackBar.open('Cumpla con todos los requesitos (foto obligatoria)');
         await this.ngxSpinnerService.hide();
       })
     }
@@ -96,6 +96,8 @@ export class RegistrarAnuncioComponent implements OnInit {
   }
 
   selectImg(file:File){
+
+    if(this.files.length>=5){return;}
 
     if (!file || !['image/jpeg', 'image/png', 'image/jpg'].includes(file.type)){
       this.matSnackBar.open('Tipo de archivo no permitido','',{duration:3000});

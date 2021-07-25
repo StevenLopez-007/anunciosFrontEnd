@@ -1,5 +1,4 @@
-<app-header></app-header>
-<div class="container pt-5">
+<div class="container">
   <div class="row content-center">
     <div class="col-lg-10 col-md-10 col-sl-11">
       <div class="form-div content-center flex-column my-3">
@@ -7,10 +6,10 @@
           <swiper [slidesPerView]="1" [spaceBetween]="0">
             <ng-template swiperSlide *ngFor="let img of previewImgs;let i = index">
               <div class="select-img">
-                <img [src]="img" alt="Imagen">
+                <img [src]="img | getimg" alt="Imagen">
               </div>
               <div class="text-center my-3">
-                <button (click)="quitImg(i)" mat-button color="warn">Descartar foto</button>
+                <button (click)="quitImg(i,img)" mat-button color="warn">Eliminar foto</button>
               </div>
             </ng-template>
 
@@ -22,7 +21,7 @@
             </ng-template>
           </swiper>
         </div>
-        <form class="example-form" [formGroup]="registerAnuncioForm" (ngSubmit)="registerAnuncio()">
+        <form class="example-form" [formGroup]="editAnuncioForm" (ngSubmit)="editAuncio()">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Nombre</mat-label>
             <input matInput formControlName="nombre">
@@ -95,8 +94,11 @@
             <input matInput formControlName="ubicacion">
           </mat-form-field>
 
-          <div>
-            <button class="button-quit-img"  type="submit" mat-flat-button color="primary">Registrar</button>
+          <div class="my-2">
+            <button class="button-quit-img"  type="submit" mat-flat-button color="primary">Editar</button>
+          </div>
+          <div class="my-2">
+            <button (click)="close()" class="button-quit-img"  type="button" mat-flat-button color="accent">Regresar</button>
           </div>
         </form>
 
@@ -104,3 +106,4 @@
     </div>
   </div>
 </div>
+

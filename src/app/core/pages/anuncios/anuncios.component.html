@@ -2,7 +2,7 @@
 <div class="container">
   <h1 class="text-center my-2">Mis anuncios</h1>
   <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-4 row-cols-md-2 row-cols-sm-2">
-    <div class="col p-3" *ngFor="let anuncio of anuncios">
+    <div class="col p-3" *ngFor="let anuncio of anuncios;let i = index">
       <mat-card class="card-pokemon bg-color2">
         <mat-card-header>
           <mat-card-title>{{anuncio.nombre | titlecase}}</mat-card-title>
@@ -18,8 +18,8 @@
         </mat-card-content>
 
         <mat-card-actions>
-          <button mat-button color="primary">Editar</button>
-          <button mat-button color="warn">Eliminar</button>
+          <button (click)="editAnuncio(anuncio,i)" mat-button color="primary">Editar</button>
+          <button (click)="deleteAnuncio(anuncio._id,i)" mat-button color="warn">Eliminar</button>
         </mat-card-actions>
       </mat-card>
     </div>

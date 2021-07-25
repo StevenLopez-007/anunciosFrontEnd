@@ -43,4 +43,29 @@ export class AnuncioService {
     )
 
   }
+
+  editAnuncio(idAdd:string,editAnuncioData:any){
+    return this.httpClient.put(`${base_url}/properties/${idAdd}`,{...editAnuncioData}).pipe(
+      map((resp:any)=>resp.propertie)
+    )
+  }
+
+  quitImg(idAdd:string,namePhoto:string){
+    return this.httpClient.post(`${base_url}/properties/deletephoto/${idAdd}`,{namePhoto});
+  }
+
+  addPhoto(idAdd:string,photo:File){
+
+    const formData = new FormData();
+    formData.append('photo',photo);
+
+    return this.httpClient.post(`${base_url}/properties/addphoto/${idAdd}`,formData).pipe(
+      map((resp:any)=>resp.img)
+    );
+
+  }
+
+  deleteAnuncio(idAdd:string){
+    return this.httpClient.delete(`${base_url}/properties/${idAdd}`)
+  }
 }

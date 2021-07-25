@@ -5,6 +5,6 @@ export interface Anuncio {
     moneda:string,
     precio:number,
     descripcion:string,
-    amenidades:Object,
-    ubicacion:Object,
+    amenidades:any,
+    ubicacion:string,
 }

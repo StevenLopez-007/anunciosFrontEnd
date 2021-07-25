@@ -2,7 +2,6 @@
 @import '~swiper/swiper-bundle';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 *{
   box-sizing: border-box;
   --bg-color1:#F9FAFE;
@@ -10,6 +9,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   --color-primary:#673ab7;
   --color-secondary:#2f3152;
 }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;background-color: var(--bg-color1); }
 
 .content-center{
   display: flex;

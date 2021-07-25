@@ -10,10 +10,11 @@ import { GetimgPipe } from './pipes/getimg.pipe';
 import { RegistrarAnuncioComponent } from './registrar-anuncio/registrar-anuncio.component';
 import { ComponentsModule } from '../components/components.module';
 import { SwiperModule } from 'swiper/angular';
+import { PipesModule } from './pipes/pipes.module';
 
 
 @NgModule({
-  declarations: [PagesComponent,AnunciosComponent, GetimgPipe, RegistrarAnuncioComponent],
+  declarations: [PagesComponent,AnunciosComponent, RegistrarAnuncioComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,
@@ -21,7 +22,8 @@ import { SwiperModule } from 'swiper/angular';
     ReactiveFormsModule,
     FormsModule,
     ComponentsModule,
-    SwiperModule
+    SwiperModule,
+    PipesModule
   ]
 })
 export class PagesModule { }
