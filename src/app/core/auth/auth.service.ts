@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   register(registerData:RegisterForm){
-    this.httpClient.post(`${base_url}/register`,{...registerData}).pipe(
+    return this.httpClient.post(`${base_url}/register`,{...registerData}).pipe(
       tap((token:any)=>{
         localStorage.setItem('a-token',token.token);
         this.router.navigateByUrl('/anuncios');

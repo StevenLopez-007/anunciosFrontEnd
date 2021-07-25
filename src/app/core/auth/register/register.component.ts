@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
     this.disableButton=true;
     await this.ngxSpinnerService.show();
     if(this.registerForm.valid){
-      this.authService.login(this.registerForm.value).subscribe(async(resp)=>{
+      this.authService.register(this.registerForm.value).subscribe(async(resp)=>{
         this.disableButton=false;
         await this.ngxSpinnerService.hide();
       },async(error)=>{
