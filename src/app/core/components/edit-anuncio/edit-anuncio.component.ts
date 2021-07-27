@@ -84,7 +84,7 @@ export class EditAnuncioComponent implements OnInit {
   }
 
   async quitImg(i: number, img: string) {
-    if (this.previewImgs.length == 1) {
+    if (this.previewImgs.length > 1) {
       await this.ngxSpinnerService.show();
       this.anuncioService.quitImg(this.anuncio._id, img)
         .subscribe(async (resp: any) => {
