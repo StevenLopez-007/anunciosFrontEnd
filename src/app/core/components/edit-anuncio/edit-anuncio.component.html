@@ -8,7 +8,7 @@
               <div class="select-img">
                 <img [src]="img | getimg" alt="Imagen">
               </div>
-              <div class="text-center my-3">
+              <div class="text-center my-3" *ngIf="previewImgs.length>1">
                 <button (click)="quitImg(i,img)" mat-button color="warn">Eliminar foto</button>
               </div>
             </ng-template>
@@ -25,6 +25,7 @@
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Nombre</mat-label>
             <input matInput formControlName="nombre">
+            <mat-error *ngIf="editAnuncioForm.get('nombre').invalid">{{getErrorNombreMessage()}}</mat-error>
           </mat-form-field>
 
           <table class="example-full-width" cellspacing="0">
@@ -35,12 +36,14 @@
                   <mat-select formControlName="moneda" (valueChange)="changeMoneda($event)">
                     <mat-option *ngFor="let moneda of monedas" [value]="moneda">{{moneda}}</mat-option>
                   </mat-select>
+                  <mat-error *ngIf="editAnuncioForm.get('moneda').invalid">{{getErrorMonedaMessage()}}</mat-error>
                 </mat-form-field>
               </td>
               <td>
                 <mat-form-field appearance="fill" floatLabel="always">
                   <mat-label>Precio</mat-label>
-                  <input formControlName="precio" matInput type="number" class="example-right-align" placeholder="0">
+                  <input [withDot]="true" appOnlyNumber formControlName="precio" matInput type="text" class="example-right-align" placeholder="0">
+                  <mat-error *ngIf="editAnuncioForm.get('precio').invalid">{{getErrorPrecioMessage()}}</mat-error>
                   <span matPrefix>$&nbsp;</span>
                   <!-- <span matSuffix>.00</span> -->
                 </mat-form-field>
@@ -52,6 +55,7 @@
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Descripción</mat-label>
               <textarea formControlName="descripcion" matInput></textarea>
+              <mat-error *ngIf="editAnuncioForm.get('descripcion').invalid">{{getErrorDescripcionMessage()}}</mat-error>
             </mat-form-field>
 
           </p>
@@ -70,7 +74,8 @@
               <td>
                 <mat-form-field class="example-full-width" appearance="fill">
                   <mat-label>Cantidad de baños</mat-label>
-                  <input type="number" matInput formControlName="num_banios">
+                  <input [withDot]="false" appOnlyNumber type="text" matInput formControlName="num_banios">
+                  <mat-error *ngIf="editAnuncioForm.get('num_banios').invalid">{{getErrorNum_baniosMessage()}}</mat-error>
                 </mat-form-field>
               </td>
             </tr>
@@ -80,11 +85,13 @@
             <tr>
               <td><mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Cantidad de habitaciones</mat-label>
-                <input type="number" matInput formControlName="num_habitaciones">
+                <input [withDot]="false" appOnlyNumber type="text" matInput formControlName="num_habitaciones">
+                <mat-error *ngIf="editAnuncioForm.get('num_habitaciones').invalid">{{getErrorNum_habitacionesMessage()}}</mat-error>
               </mat-form-field></td>
               <td><mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Cantidad de estacionamientos</mat-label>
-                <input type="number" matInput formControlName="num_estacionamientos">
+                <input [withDot]="false" appOnlyNumber type="text" matInput formControlName="num_estacionamientos">
+                <mat-error *ngIf="editAnuncioForm.get('num_estacionamientos').invalid">{{getErrorNum_estacionamientosMessage()}}</mat-error>
               </mat-form-field></td>
             </tr>
           </table>

@@ -46,7 +46,7 @@ export class EditAnuncioComponent implements OnInit {
     public dialogRef: MatDialogRef<EditAnuncioComponent>) {
     this.anuncio = data.anuncio;
     this.amenidadesSelected = this.anuncio.amenidades.others;
-    setTimeout(() => { this.previewImgs = this.anuncio.photos; }, 1500)
+    setTimeout(() => { this.previewImgs = this.anuncio.photos; }, 300)
     this.configForm();
   }
 
@@ -95,6 +95,8 @@ export class EditAnuncioComponent implements OnInit {
           this.matSnackBar.open(error.error.msg, '', { duration: 3000 });
           await this.ngxSpinnerService.hide();
         })
+    }else{
+      this.matSnackBar.open('Es necesario al menos una foto');
     }
   }
 
@@ -134,17 +136,99 @@ export class EditAnuncioComponent implements OnInit {
     this.editAnuncioForm = this.formBuilder.group({
       nombre: [this.anuncio.nombre, [Validators.required, Validators.minLength(10)]],
       moneda: [this.anuncio.moneda, [Validators.required]],
-      precio: [this.anuncio.precio, [Validators.min(1)]],
+      precio: [this.anuncio.precio, [Validators.min(1),Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       descripcion: [this.anuncio.descripcion, [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
       ubicacion: [this.anuncio.ubicacion, [Validators.required]],
-      num_banios: [this.anuncio.amenidades.num_banios, [Validators.required, Validators.min(0)]],
-      num_habitaciones: [this.anuncio.amenidades.num_habitaciones, [Validators.required, Validators.min(0)]],
-      num_estacionamientos: [this.anuncio.amenidades.num_estacionamientos, [Validators.required, Validators.min(0)]],
+      num_banios: [this.anuncio.amenidades.num_banios, [Validators.required, Validators.min(0),Validators.pattern(/^\d+$/)]],
+      num_habitaciones: [this.anuncio.amenidades.num_habitaciones, [Validators.required, Validators.min(0),Validators.pattern(/^\d+$/)]],
+      num_estacionamientos: [this.anuncio.amenidades.num_estacionamientos, [Validators.required, Validators.min(0),Validators.pattern(/^\d+$/)]],
     });
   }
 
   close() {
     this.dialogRef.close(this.edited);
+  }
+
+  // Mensajes de error del formulario
+  getErrorNombreMessage() {
+    if (this.editAnuncioForm.get('nombre').hasError('required')) {
+      return 'El nombre es requerido';
+    }
+
+    return this.editAnuncioForm.get('nombre').hasError('minlength') ? 'El nombre es muy corto' : '';
+  }
+
+  getErrorMonedaMessage() {
+    if (this.editAnuncioForm.get('moneda').hasError('required')) {
+      return 'El tipo de moneda es requerida.';
+    }
+    return null;
+  }
+
+  getErrorPrecioMessage() {
+    if(this.editAnuncioForm.get('precio').hasError('pattern')){
+      return 'Debe ingresar un precio válido'
+    }
+    if (this.editAnuncioForm.get('precio').hasError('min')) {
+      return 'El precio tiene que ser mayo a 1';
+    }
+
+    return null;
+  }
+
+  getErrorDescripcionMessage() {
+    const descripcion = this.editAnuncioForm.get('descripcion');
+    if (descripcion.hasError('required')) {
+      return 'La descripcion es requerida';
+    }
+    if(descripcion.hasError('minlength')){
+      return 'La descripcion debe tener más de 10 caractéres'
+    }
+    return descripcion.hasError('maxlength') ? 'La descripción debe tener menos de 100 caractéres' : '';
+  }
+
+  getErrorUbicacionMessage() {
+    const ubicacion = this.editAnuncioForm.get('ubicacion')
+    if (ubicacion.hasError('required')) {
+      return 'La ubicación es requerida';
+    }
+    return null;
+  }
+
+  getErrorNum_baniosMessage() {
+    const num_banios = this.editAnuncioForm.get('num_banios');
+    if(num_banios.hasError('pattern')){
+      return 'Debe ingresar un número entero'
+    }
+    if (num_banios.hasError('required')) {
+      return 'El numero de baños es requerido';
+    }
+
+    return num_banios.hasError('min') ? 'El numero de baños debe ser cero o mayor a este' : '';
+  }
+
+  getErrorNum_habitacionesMessage() {
+    const num_habitaciones = this.editAnuncioForm.get('num_habitaciones');
+    if(num_habitaciones.hasError('pattern')){
+      return 'Debe ingresar un número entero'
+    }
+    if (num_habitaciones.hasError('required')) {
+      return 'El numero de baños es requerido';
+    }
+
+    return num_habitaciones.hasError('min') ? 'El numero de habitaciones debe ser cero o mayor a este' : '';
+  }
+
+  getErrorNum_estacionamientosMessage() {
+    const num_estacionamientos = this.editAnuncioForm.get('num_estacionamientos');
+    if(num_estacionamientos.hasError('pattern')){
+      return 'Debe ingresar un número entero'
+    }
+    if (num_estacionamientos.hasError('required')) {
+      return 'El numero de estacionamientos es requerido';
+    }
+
+    return num_estacionamientos.hasError('min') ? 'El numero de estacionamientos debe ser cero o mayor a este' : '';
   }
 
 }

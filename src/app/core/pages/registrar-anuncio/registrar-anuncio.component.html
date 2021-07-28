@@ -22,10 +22,11 @@
             </ng-template>
           </swiper>
         </div>
-        <form class="example-form" [formGroup]="registerAnuncioForm" (ngSubmit)="registerAnuncio()">
+        <form #formDirective="ngForm" class="example-form" [formGroup]="registerAnuncioForm" (ngSubmit)="registerAnuncio(formDirective)">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Nombre</mat-label>
             <input matInput formControlName="nombre">
+            <mat-error *ngIf="registerAnuncioForm.get('nombre').invalid">{{getErrorNombreMessage()}}</mat-error>
           </mat-form-field>
 
           <table class="example-full-width" cellspacing="0">
@@ -36,12 +37,14 @@
                   <mat-select formControlName="moneda" (valueChange)="changeMoneda($event)">
                     <mat-option *ngFor="let moneda of monedas" [value]="moneda">{{moneda}}</mat-option>
                   </mat-select>
+                  <mat-error *ngIf="registerAnuncioForm.get('moneda').invalid">{{getErrorMonedaMessage()}}</mat-error>
                 </mat-form-field>
               </td>
               <td>
                 <mat-form-field appearance="fill" floatLabel="always">
                   <mat-label>Precio</mat-label>
-                  <input formControlName="precio" matInput type="number" class="example-right-align" placeholder="0">
+                  <input [withDot]="true" appOnlyNumber formControlName="precio" matInput type="text" class="example-right-align" placeholder="0">
+                  <mat-error *ngIf="registerAnuncioForm.get('precio').invalid">{{getErrorPrecioMessage()}}</mat-error>
                   <span matPrefix>$&nbsp;</span>
                   <!-- <span matSuffix>.00</span> -->
                 </mat-form-field>
@@ -53,6 +56,7 @@
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Descripción</mat-label>
               <textarea formControlName="descripcion" matInput></textarea>
+              <mat-error *ngIf="registerAnuncioForm.get('descripcion').invalid">{{getErrorDescripcionMessage()}}</mat-error>
             </mat-form-field>
 
           </p>
@@ -71,7 +75,8 @@
               <td>
                 <mat-form-field class="example-full-width" appearance="fill">
                   <mat-label>Cantidad de baños</mat-label>
-                  <input type="number" matInput formControlName="num_banios">
+                  <input [withDot]="false" appOnlyNumber type="text" matInput formControlName="num_banios">
+                  <mat-error *ngIf="registerAnuncioForm.get('num_banios').invalid">{{getErrorNum_baniosMessage()}}</mat-error>
                 </mat-form-field>
               </td>
             </tr>
@@ -81,11 +86,13 @@
             <tr>
               <td><mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Cantidad de habitaciones</mat-label>
-                <input type="number" matInput formControlName="num_habitaciones">
+                <input [withDot]="false" appOnlyNumber type="text" matInput formControlName="num_habitaciones">
+                <mat-error *ngIf="registerAnuncioForm.get('num_habitaciones').invalid">{{getErrorNum_habitacionesMessage()}}</mat-error>
               </mat-form-field></td>
               <td><mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Cantidad de estacionamientos</mat-label>
-                <input type="number" matInput formControlName="num_estacionamientos">
+                <input [withDot]="false" appOnlyNumber type="text" matInput formControlName="num_estacionamientos">
+                <mat-error *ngIf="registerAnuncioForm.get('num_estacionamientos').invalid">{{getErrorNum_estacionamientosMessage()}}</mat-error>
               </mat-form-field></td>
             </tr>
           </table>
@@ -93,6 +100,7 @@
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Ubicación</mat-label>
             <input matInput formControlName="ubicacion">
+            <mat-error *ngIf="registerAnuncioForm.get('ubicacion').invalid">{{getErrorUbicacionMessage()}}</mat-error>
           </mat-form-field>
 
           <div>

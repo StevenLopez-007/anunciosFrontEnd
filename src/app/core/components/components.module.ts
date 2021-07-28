@@ -7,6 +7,7 @@ import { EditAnuncioComponent } from './edit-anuncio/edit-anuncio.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SwiperModule } from 'swiper/angular';
 import { PipesModule } from '../pages/pipes/pipes.module';
+import { DirectivesModule } from '../pages/directives/directives.module';
 
 @NgModule({
   declarations: [HeaderComponent, EditAnuncioComponent],
@@ -17,7 +18,8 @@ import { PipesModule } from '../pages/pipes/pipes.module';
     ReactiveFormsModule,
     FormsModule,
     SwiperModule,
-    PipesModule
+    PipesModule,
+    DirectivesModule
   ],
   exports:[HeaderComponent]
 })

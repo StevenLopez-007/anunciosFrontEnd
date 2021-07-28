@@ -6,12 +6,11 @@ import { PagesComponent } from './pages.component';
 import { AnunciosComponent } from './anuncios/anuncios.component';
 import { AngularMaterialModule } from '../../angular-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GetimgPipe } from './pipes/getimg.pipe';
 import { RegistrarAnuncioComponent } from './registrar-anuncio/registrar-anuncio.component';
 import { ComponentsModule } from '../components/components.module';
 import { SwiperModule } from 'swiper/angular';
 import { PipesModule } from './pipes/pipes.module';
-
+import { DirectivesModule } from './directives/directives.module';
 
 @NgModule({
   declarations: [PagesComponent,AnunciosComponent, RegistrarAnuncioComponent],
@@ -23,7 +22,8 @@ import { PipesModule } from './pipes/pipes.module';
     FormsModule,
     ComponentsModule,
     SwiperModule,
-    PipesModule
+    PipesModule,
+    DirectivesModule
   ]
 })
 export class PagesModule { }
