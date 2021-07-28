@@ -31,7 +31,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Confirme su contraseña</mat-label>
-        <input formControlName="confirmPassword" matInput [type]="hide ? 'password' : 'text'">
+        <input formControlName="confirmPassword" matInput [type]="hideConfirmPass ? 'password' : 'text'">
         <mat-error *ngIf="registerForm.get('confirmPassword').invalid">{{getErrorConfirmPasswordMessage()}}</mat-error>
         <button type="button" mat-icon-button matSuffix (click)="hideConfirmPass = !hideConfirmPass">
           <mat-icon>{{hideConfirmPass ? 'visibility_off' : 'visibility'}}</mat-icon>
