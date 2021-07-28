@@ -7,21 +7,21 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls:['../authStyles.scss']
+  styleUrls: ['../authStyles.scss']
 })
 export class LoginComponent implements OnInit {
 
   hide = true;
-  loginForm:FormGroup;
+  loginForm: FormGroup;
 
-  disableButton=false;
+  disableButton = false;
 
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private matSnackBar: MatSnackBar,
     private ngxSpinnerService: NgxSpinnerService) { }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.configLoginForm();
   }
 
@@ -43,24 +43,25 @@ export class LoginComponent implements OnInit {
   }
 
 
-  configLoginForm(){
+  configLoginForm() {
     this.loginForm = this.formBuilder.group({
-      email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.minLength(6)]]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]]
     })
   }
 
-  async login(){
-    this.disableButton=true;
+  async login() {
+    this.disableButton = true;
     await this.ngxSpinnerService.show();
-    if(this.loginForm.valid){
-      this.authService.login(this.loginForm.value).subscribe(async(resp)=>{
-        this.disableButton=false;
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginForm.value).subscribe(async (resp) => {
+        this.disableButton = false;
         await this.ngxSpinnerService.hide();
-      },async(error)=>{
+      }, async (error) => {
         console.log(error.error.msg);
-        this.matSnackBar.open(error.error.msg,'',{duration:3000});
-        this.disableButton=false;
+        this.matSnackBar.open(error.error.msg, '', { duration: 3000 });
+        this.disableButton = false;
         await this.ngxSpinnerService.hide();
       })
     }
