@@ -16,6 +16,7 @@
 
             <ng-template swiperSlide  *ngIf="previewImgs.length<5">
               <div class="select-img my-3">
+                <h2>Seleccione una foto</h2>
                 <input accept=".png,.jpg,.jpeg" type="file" (change)="selectImg($event.target['files'][0])">
                 <img src="/assets/noImg.jpg" alt="No hay una imagen">
               </div>

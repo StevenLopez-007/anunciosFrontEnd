@@ -47,19 +47,17 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]]
     })
   }
 
   async login() {
     this.disableButton = true;
-    await this.ngxSpinnerService.show();
     if (this.loginForm.valid) {
+      await this.ngxSpinnerService.show();
       this.authService.login(this.loginForm.value).subscribe(async (resp) => {
         this.disableButton = false;
         await this.ngxSpinnerService.hide();
       }, async (error) => {
-        console.log(error.error.msg);
         this.matSnackBar.open(error.error.msg, '', { duration: 3000 });
         this.disableButton = false;
         await this.ngxSpinnerService.hide();

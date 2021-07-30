@@ -49,3 +49,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;background-c
 .example-spacer{
   flex: 1 1 auto;
 }
+
+.empty{
+width: 100% !important;
+display: flex;
+align-items: center;
+justify-content: center;
+min-height: 24rem;
+img{
+  width: 14rem;
+  height: 14rem;
+}
+}

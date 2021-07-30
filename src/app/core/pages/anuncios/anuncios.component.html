@@ -2,26 +2,34 @@
 <div class="container">
   <h1 class="text-center my-2">Mis anuncios</h1>
   <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-4 row-cols-md-2 row-cols-sm-2">
-    <div class="col p-3" *ngFor="let anuncio of anuncios;let i = index">
-      <mat-card class="card-pokemon bg-color2">
-        <mat-card-header>
-          <mat-card-title>{{anuncio.nombre | titlecase}}</mat-card-title>
-          <mat-card-subtitle>Precio: {{anuncio.precio}} {{anuncio.moneda}}</mat-card-subtitle>
-        </mat-card-header>
+    <ng-container *ngIf="anuncios.length>0;else empty">
+      <div class="col p-3" *ngFor="let anuncio of anuncios;let i = index">
+        <mat-card class="bg-color2">
+          <mat-card-header>
+            <mat-card-title>{{anuncio.nombre | titlecase}}</mat-card-title>
+            <mat-card-subtitle>Precio: {{anuncio.precio}} {{anuncio.moneda}}</mat-card-subtitle>
+          </mat-card-header>
 
-        <img mat-card-image [src]="anuncio.photos[0] | getimg" [alt]="anuncio.nombre">
+          <img mat-card-image [src]="anuncio.photos[0] | getimg" [alt]="anuncio.nombre">
 
-        <mat-card-content>
-          <p>
-            {{anuncio.descripcion}}
-          </p>
-        </mat-card-content>
+          <mat-card-content>
+            <p>
+              {{anuncio.descripcion |upperfirstcase}}
+            </p>
+          </mat-card-content>
 
-        <mat-card-actions>
-          <button (click)="editAnuncio(anuncio,i)" mat-button color="primary">Editar</button>
-          <button (click)="deleteAnuncio(anuncio._id,i)" mat-button color="warn">Eliminar</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+          <mat-card-actions>
+            <button (click)="editAnuncio(anuncio,i)" mat-button color="primary">Editar</button>
+            <button (click)="deleteAnuncio(anuncio._id,i)" mat-button color="warn">Eliminar</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #empty>
+  <div class="empty">
+    <img src="/assets/empty1.svg" alt="Vacío">
+  </div>
+</ng-template>

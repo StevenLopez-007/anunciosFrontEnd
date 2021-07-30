@@ -90,6 +90,7 @@ export class RegistrarAnuncioComponent implements OnInit {
         this.files =[];
         this.previewImgs = [];
         this.amenidadesSelected =[];
+        this.matSnackBar.open('Anuncio registrado ','Ok',{duration:3000})
         await this.ngxSpinnerService.hide();
       },async (error)=>{
         console.log(error);
