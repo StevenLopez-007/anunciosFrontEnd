@@ -1,5 +1,5 @@
 <app-auth-template>
-  <div class="form-div bg-white">
+  <div class="form-div bg-white d-flex align-items-center justify-content-center">
     <form class="p-5" [formGroup]="loginForm" (ngSubmit)="login()">
       <div class="text-center">
         <img class="img-medium" src="/assets/logo.svg" alt="">
@@ -8,13 +8,13 @@
         <h1 class="text-center text-secondary">Anuncios 24/7</h1>
       </div>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="legacy">
         <mat-label>Ingrese su email</mat-label>
         <input autocomplete="email" inputmode="email" type="email" matInput placeholder="example@example.com" formControlName="email" required>
         <mat-error *ngIf="loginForm.get('email').invalid">{{getErrorEmailMessage()}}</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="legacy">
         <mat-label>Ingrese su contraseña</mat-label>
         <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
         <mat-error *ngIf="loginForm.get('password').invalid">{{getErrorPasswordMessage()}}</mat-error>

@@ -10,6 +10,7 @@ export class AuthTemplateComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    document.body.style.backgroundColor ='white';
   }
 
 }
